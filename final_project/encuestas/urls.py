@@ -5,8 +5,10 @@ app_name = 'encuestas'
 
 urlpatterns = [
 	path('', views.home, name='home'),
-	path('detalle/',views.detalle, name="detalle"),
+	path('<int:preguntaID>/',views.detalle, name="detalle"),
 	path('tablon/',views.tablon, name = 'tablon'),
 	path('editar/', views.editar, name = 'editar'),
+	path('<int:preguntaID>/votar/',views.votar,name = 'votar'),
+	path('<int:preguntaID>/resultado/',views.resultado,name='resultado')
 	
 ]
