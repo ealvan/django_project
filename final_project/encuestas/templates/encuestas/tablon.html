@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tablon de preguntas</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Pregunta</th>
+			<th>Fecha de publicacion</th>
+		</tr>
+		
+			{% for pregunta in lista %}
+				<tr>	
+					<td>{{pregunta.pregunta_txt}}</td>
+					<td>{{pregunta.pub_fecha}}</td>
+				</tr>	
+			{% endfor %}
+
+	</table>
+</body>
+</html>
