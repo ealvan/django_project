@@ -49,6 +49,13 @@ def crear_opcion(request,preguntaID):
 		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
 
 def tablon(request):
+	
+	lista = Pregunta.objects.all()
+	if lista:
+		return render(request,'encuestas/tablon.html',{'lista':lista,})
+	else:
+		raise Http404("lo sentimos, aun no se han publicado preguntas")
+
 	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
 def editar(request):
 	return HttpResponse("aqui se editara la pregunta")
