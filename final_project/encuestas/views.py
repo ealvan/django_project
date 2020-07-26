@@ -34,6 +34,19 @@ def resultado(request,preguntaID):
 		raise Http404("la pregunta no existe")
 	return render(request,'encuestas/resultado.html',{'pregunta':pregunta})
 
+def crear_opcion(request,preguntaID):
+	try:
+		pregunta = Pregunta.objects.get(id=preguntaID)
+	except:
+		raise Http404("no existe esta pregunta")
+	if request.method == "POST":
+		try:
+			pregunta.opcion_set.create(opcion_txt=request.POST['opcion'],votos=0)
+		except:
+			raise Http404("lo sentimos no se pudo crear la bbdd")
+		return HttpResponseRedirect(reverse('encuestas:detalle', args=(pregunta.id,)))
+	else:
+		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
 
 def tablon(request):
 	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")

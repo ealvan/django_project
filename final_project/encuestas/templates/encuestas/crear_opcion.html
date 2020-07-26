@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>crear opcion</title>
+</head>
+<body>
+	<form action="{% url 'encuestas:crear_opcion' pregunta.id  %}" method="POST">{% csrf_token %}
+		<input type="text" name="opcion">
+		<input type="submit" value="Crear Opcion">
+	</form>
+
+</body>
+</html>
