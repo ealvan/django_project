@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Tablon de preguntas</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% block title %}
+Tablon de preguntas
+{% endblock %}
+
+{% block body %}
 	<table>
 		<tr>
 			<th>Pregunta</th>
@@ -18,5 +18,4 @@
 			{% endfor %}
 
 	</table>
-</body>
-</html>
+{% endblock %}

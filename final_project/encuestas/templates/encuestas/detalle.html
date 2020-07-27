@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mi pregunta</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% block title %}
+	Mi pregunta
+{% endblock %}
+
+{% block body %}
 	<h3>Pregunta : {{pregunta.pregunta_txt}} </h3>
 	<h4>Fecha de publicacion: {{pregunta.pub_fecha}}</h4>
 	{% if error %}
@@ -22,6 +22,4 @@
 		{% endif %}
 	</form>
 	<a href="{% url 'encuestas:crear_opcion' pregunta.id %}">desea crear una opcion?</a>
-
-</body>
-</html>
+{% endblock %}

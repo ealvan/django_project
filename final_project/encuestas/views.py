@@ -57,5 +57,3 @@ def tablon(request):
 		raise Http404("lo sentimos, aun no se han publicado preguntas")
 
 	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
-def editar(request):
-	return HttpResponse("aqui se editara la pregunta")

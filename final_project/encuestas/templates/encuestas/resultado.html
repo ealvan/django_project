@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>pregunta official</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% block title %}
+Pregunta Oficial
+{% endblock %}
+{% block body %}
 	<h2>Pregunta : {{pregunta.pregunta_txt}}</h2>
 	<h3>Publicado : {{pregunta.pub_fecha}}</h3>
 	<ul>
@@ -12,5 +11,4 @@
 		{% endfor %}
 	</ul>
 	<a href="{% url 'encuestas:detalle' pregunta.id %}">¿volver a botar?</a>
-</body>
-</html>
+{% endblock %}
