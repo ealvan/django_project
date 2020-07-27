@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>
+                        {% block title %}
+                        {% endblock %}
+                </title>
+        </head>
+        <body>
+		<nav>
+			<ul>
+				<li><a href= '{% url "encuestas:home" %}'>home</a></li>
+				<li><a href= '{% url "encuestas:tablon" %}'>Tablon de Preguntas</a></li>
+				
+			</ul>
+
+		</nav>
+                {% block body %}
+                {% endblock %}
+        </body>
+</html>
+
