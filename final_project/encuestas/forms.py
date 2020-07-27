@@ -7,5 +7,4 @@ class PreguntaForm(forms.ModelForm):
     model = Pregunta
     fields = [
         'pregunta_txt',
-        'pub_fecha',
         ]
