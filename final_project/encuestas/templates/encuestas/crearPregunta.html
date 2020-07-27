@@ -3,6 +3,7 @@
 Nueva Pregunta
 {% endblock %}
 {% block body %}
+<h1>Agregando Pregunta &#128512;</h1>
 <form method = 'POST'> {% csrf_token %}
   {{ form.as_p }}
   <input type = 'submit' value = 'Grabar'/>
