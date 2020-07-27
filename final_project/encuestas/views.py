@@ -69,4 +69,4 @@ def preguntaCreateView(request):
     context = {
             'form': form
             }
-    return render(request, 'encuestas/preguntaCreate.html', context)
+    return render(request, 'encuestas/crearPregunta.html', context)

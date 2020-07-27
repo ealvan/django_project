@@ -2,7 +2,7 @@ from django import forms
 
 from .models import Pregunta
 
-class FotoForm(forms.ModelForm):
+class PreguntaForm(forms.ModelForm):
   class Meta:
     model = Pregunta
     fields = [

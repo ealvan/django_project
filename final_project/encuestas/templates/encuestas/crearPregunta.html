@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}
+Nueva Pregunta
+{% endblock %}
+{% block body %}
+<form method = 'POST'> {% csrf_token %}
+  {{ form.as_p }}
+  <input type = 'submit' value = 'Grabar'/>
+</form>
+{% endblock %}
