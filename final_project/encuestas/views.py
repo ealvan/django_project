@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
+from .forms import PreguntaForm
+
 # Create your views here.
 
 def home(request):
@@ -57,3 +59,14 @@ def tablon(request):
 		raise Http404("lo sentimos, aun no se han publicado preguntas")
 
 	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
+
+def preguntaCreateView(request):
+    form = PreguntaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = PreguntaForm()
+
+    context = {
+            'form': form
+            }
+    return render(request, 'encuestas/preguntaCreate.html', context)
