@@ -3,10 +3,21 @@ from django.utils import timezone
 import datetime
 # Create your models here.
 class Pregunta(models.Model):
-	pregunta_txt = models.CharField(max_length=100)
-	pub_fecha  = models.DateTimeField('Fecha de Publicacion')
-	def __str__(self):
-		return f'{self.pregunta_txt}'
+    pregunta_txt = models.CharField(max_length=100)
+    comida='co'
+    deporte='dp'
+    salud='sa'
+    farandula='fa'
+    noticias='no'
+    cine='cn'
+    ciencias='ci'
+    opciones = [(comida,'Comida'),(deporte,'Deporte'),(salud,'Salud'),(farandula,'Farandula'),(noticias,'Noticias'),
+            (cine,'Cine'),(ciencias,'Ciencias'),
+            ]
+    area = models.CharField(max_length=2,choices=opciones,default='salud',)
+    pub_fecha = models.DateTimeField('Fecha de Publicacion')
+    def __str__(self):
+        return f'{self.pregunta_txt}'
 
 class Opcion(models.Model):
 	pregunta_txt = models.ForeignKey(Pregunta, on_delete = models.CASCADE)
@@ -14,3 +25,4 @@ class Opcion(models.Model):
 	votos = models.IntegerField(default=0)	
 	def __str__(self):
 		return f'opinion: {self.opcion_txt} votos: {self.votos}'
+
