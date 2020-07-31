@@ -15,6 +15,7 @@ def registro(request):
 		form = CrearUsuarioForm(request.POST)
 		if form.is_valid():
 			form.save()
+			return HttpResponseRedirect(reverse('encuestas:home',))
 	contexto = {'form':form}
 	return render(request,'registro.html',contexto)
 def detalle(request,preguntaID):
