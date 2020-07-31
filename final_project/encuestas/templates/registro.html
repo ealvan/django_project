@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mi registro de usuarios</title>
+</head>
+<body>
+	<form method="POST" action="">{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" name="crear usuario">
+	</form>
+
+</body>
+</html>

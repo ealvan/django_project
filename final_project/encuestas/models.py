@@ -10,9 +10,14 @@ class Pregunta(models.Model):
     noticias='no'
     cine='cn'
     ciencias='ci'
-    opciones = [(comida,'Comida'),(deporte,'Deporte'),(salud,'Salud'),(farandula,'Farandula'),(noticias,'Noticias'),
-            (cine,'Cine'),(ciencias,'Ciencias'),
-            ]
+    opciones = [(comida,'Comida'),
+    			(deporte,'Deporte'),
+    			(salud,'Salud'),
+    			(farandula,'Farandula'),
+    			(noticias,'Noticias'),
+    			(cine,'Cine'),
+    			(ciencias,'Ciencias'),
+            	]
     area = models.CharField(max_length=2,choices=opciones,default='salud',)
     pub_fecha = models.DateTimeField('Fecha de Publicacion', default = timezone.now())
     def __str__(self):

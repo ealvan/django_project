@@ -3,11 +3,21 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
 from .forms import PreguntaForm
-
+from django.contrib.auth.forms import UserCreationForm
+from encuestas.forms import CrearUsuarioForm
 # Create your views here.
 
 def home(request):
 	return HttpResponse("Aqui estara nuestro home")
+def registro(request):
+	form = CrearUsuarioForm()
+	if request.method == 'POST':
+		form = CrearUsuarioForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('encuestas:home',))
+	contexto = {'form':form}
+	return render(request,'registro.html',contexto)
 def detalle(request,preguntaID):
 	try:
 		pregunta = Pregunta.objects.get(pk=preguntaID)
