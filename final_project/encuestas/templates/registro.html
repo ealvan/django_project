@@ -5,9 +5,12 @@
 </head>
 <body>
 	<form method="POST" action="">{% csrf_token %}
-		{{form.as_p}}
+		{% for campo in form %}
+			<p>{{campo.label}}
+			{{campo}}</p>
+		{% endfor %}
 		<input type="submit" name="crear usuario">
 	</form>
-
+	{{form.errors}}
 </body>
 </html>
