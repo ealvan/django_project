@@ -4,22 +4,21 @@
 {% endblock %}
 
 {% block body %}
-	<h3>Pregunta : {{pregunta.pregunta_txt}} </h3>
+	<h2>Pregunta : {{pregunta.pregunta_txt}} </h2>
 	<h4>Fecha de publicacion: {{pregunta.pub_fecha}}</h4>
 	{% if error %}
 		<p><strong>{{error}}</strong></p>
-
 	{% endif %}
 	<form action="{% url 'encuestas:votar' pregunta.id %}" method="POST">{% csrf_token %}
 		{% if pregunta.opcion_set.all %}
 			{% for opcion in pregunta.opcion_set.all %}
 			<input type="radio" name="opcion" id='opcion{{forloop.counter}}' value="{{opcion.id}}">
-				<label for="opcion{{forloop.counter}}"> {{opcion.opcion_txt}}</label>
+			<label for="opcion{{forloop.counter}}"> {{opcion.opcion_txt}}</label><br>
 			{% endfor %}
-			<input type="submit" value="Votar">
+			<br><input type="submit" value="Votar">
 		{%else%}
 			<p>Lo sentimos aun no existe opciones</p>
 		{% endif %}
 	</form>
-	<a href="{% url 'encuestas:crear_opcion' pregunta.id %}">desea crear una opcion?</a>
+	<br><a href="{% url 'encuestas:crear_opcion' pregunta.id %}">Desea crear opciones?</a>
 {% endblock %}

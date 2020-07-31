@@ -1,13 +1,41 @@
 {% extends 'base.html'%}
-{% block title %}
-Crear Opcion
-{% endblock %}
-{% block body %}
-	<p>Ingresa una opcion</p>
 
-	<form action="{% url 'encuestas:crear_opcion' pregunta.id  %}" method="POST">{% csrf_token %}
-		<input type="text" name="opcion">
-		<input type="submit" value="Crear Opcion">
-	</form>
+{% block title %}
+  Creando Opción
+{% endblock %}
+
+{% block head %}
+  <script>
+    window.addEventListener("load", inicio);
+    function inicio(){
+      document.getElementById("crearOpcion").addEventListener("click", crearOpcion);
+      document.getElementById("borrarUltimo").addEventListener("click", borrarUltimo);
+    }
+    function crearOpcion(){
+      var parrafo = document.createElement("p");
+      var texto = document.createTextNode(document.getElementById("texto").value);
+      parrafo.appendChild(texto);
+      var cont = document.getElementById("div1");
+      cont.appendChild(parrafo);
+    }
+    function borrarUltimo(){
+      var cont = document.getElementById("div1");
+      var hijo = cont.lastChild;
+      cont.removeChild(hijo);
+    }
+  </script>
+{% endblock %}
+
+{% block body %}
+  <p>Ingrese una opción:</p>
+  <form action="{% url 'encuestas:crear_opcion' pregunta.id  %}" method="POST">{% csrf_token %}
+    <input type="text" name="opcion" id = "texto">		
+    <!-- <input type="submit" value="Crear Opcion"> -->
+    <input type = "submit" value = "Grabar">
+  </form>
+
+  <button id = "crearOpcion">Crear una nueva opcion</button>
+  <button id = "borrarUltimo">Borrar ultima opción</button>
+  <div id = "div1"></div>
 
 {% endblock %}
