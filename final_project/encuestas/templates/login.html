@@ -5,6 +5,11 @@
 </head>
 <body>
 	<h1>Login</h1>
-	
+	<form method="POST" action=".">{% csrf_token %}
+		<input type="text" name="username" placeholder="Nombre de usuario">
+		<input type="password" name="password" placeholder="contraseña">
+		<input type="submit">
+	</form>
+	<p>{{mensaje}}</p>
 </body>
 </html>
