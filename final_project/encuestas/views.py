@@ -55,11 +55,10 @@ def crear_opcion(request,preguntaID):
     if request.method == "POST":
         cadena = request.POST.get("lista");
         lista = cadena.split(",")
-        for opcion in lista:
-            print(opcion)
-        #print(request.POST.get("lista"))
         try:
-            pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
+            for x in range(len(lista) - 1):
+                pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
+                #pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
         except:
             raise Http404("lo sentimos no se pudo crear la bbdd")
         return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
