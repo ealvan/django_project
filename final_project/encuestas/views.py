@@ -76,26 +76,6 @@ def resultado(request,preguntaID):
 
 @login_required(login_url='login')
 def crear_opcion(request,preguntaID):
-<<<<<<< HEAD
-    try:
-        pregunta = Pregunta.objects.get(id = preguntaID)
-    except:
-        raise Http404("no existe esta pregunta")
-
-    if request.method == "POST":
-        cadena = request.POST.get("lista");
-        lista = cadena.split(",")
-        try:
-            for x in range(len(lista) - 1):
-                pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
-                #pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
-        except:
-            raise Http404("lo sentimos no se pudo crear la bbdd")
-        return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
-    else:
-        return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
-=======
-
 	try:
 		pregunta = Pregunta.objects.get(id=preguntaID)
 	except:
@@ -109,7 +89,7 @@ def crear_opcion(request,preguntaID):
 		return HttpResponseRedirect(reverse('encuestas:detalle', args=(pregunta.id,)))
 	else:
 		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
->>>>>>> origin/experimental
+
 
 def tablon(request):
 	lista = Pregunta.objects.all()
@@ -125,17 +105,10 @@ def preguntaCreateView(request):
         if form.is_valid():
             form.save()
             form = PreguntaForm()
-
-<<<<<<< HEAD
-        context = {
-                'form': form
-                }
-        return render(request, 'encuestas/crearPregunta.html', context)
-=======
-    context = {
-            'form': form
+            context = {
+                    'form': form
             }
-    return render(request, 'encuestas/crearPregunta.html', context)
+            return render(request, 'encuestas/crearPregunta.html', context)
 @login_required(login_url='login')
 def borrar(request,preguntaID):
 	try:
@@ -147,4 +120,4 @@ def borrar(request,preguntaID):
 	except:
 		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
 	return render(request,'encuestas/borrar.html',{})	
->>>>>>> origin/experimental
+
