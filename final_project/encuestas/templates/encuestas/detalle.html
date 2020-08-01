@@ -21,4 +21,5 @@
 		{% endif %}
 	</form>
 	<br><a href="{% url 'encuestas:crear_opcion' pregunta.id %}">Desea crear opciones?</a>
+	 <a href="{% url 'encuestas:borrar' pregunta.id %} ">Elimine la pregunta</a>
 {% endblock %}
