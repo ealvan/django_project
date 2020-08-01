@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mi registro de usuarios</title>
-</head>
-<body>
+{% extends 'base2.html'%}
+{% block title %}
+	Mi registro de usuarios
+{% endblock %}
+{% block body %}
+
 	<form method="POST" action="">{% csrf_token %}
 		{% for campo in form %}
 			<p>{{campo.label}}
@@ -12,5 +12,5 @@
 		<input type="submit" name="crear usuario">
 	</form>
 	{{form.errors}}
-</body>
-</html>
+{% endblock %}
+

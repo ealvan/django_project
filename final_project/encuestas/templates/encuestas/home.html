@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mi home</title>
-</head>
-<body>
+
+{% extends 'base.html'%}
+{% block title %}
+
+Mi home
+{% endblock %}
+
+{% block body %}
+
 	<h1>Home</h1>
 	<p>Este es la pagina principal</p>
 	<span><a href="{% url 'logout' %}">Logout</a></span><br>
 	<span><a href="{% url 'login' %}">Login</a></span><br>
 	<span><a href="{% url 'encuestas:tablon' %}">Tablon de preguntas publicadas</a></span>
 	{{mensaje}}
+<<<<<<< HEAD
 </body>
 </html>
+=======
+{% endblock %}
+>>>>>>> origin/experimental

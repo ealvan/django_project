@@ -12,4 +12,8 @@ urlpatterns = [
 	path('<int:preguntaID>/crear_opcion/',views.crear_opcion, name='crear_opcion'),
         path('agregar/', views.preguntaCreateView, name = 'crear_pregunta'),
         path('<int:preguntaID>/borrar/',views.borrar, name='borrar'),
+<<<<<<< HEAD
 ]
+=======
+        ]
+>>>>>>> origin/experimental
