@@ -9,6 +9,7 @@ class PreguntaForm(forms.ModelForm):
     model = Pregunta
     fields = [
         'pregunta_txt',
+        'area',
         ]
 class CrearUsuarioForm(UserCreationForm):
 	class Meta:
