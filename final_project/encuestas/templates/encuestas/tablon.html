@@ -3,11 +3,21 @@
 Tablon de preguntas
 {% endblock %}
 
+{% block head%}
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+{% endblock %}
+
 {% block body %}
+  <center>
 	<table>
 		<tr>
 			<th>Pregunta</th>
 			<th>Fecha de publicacion</th>
+			<th>Votos</th>
 		</tr>
 		
 			{% for pregunta in lista %}
@@ -25,4 +35,5 @@ Tablon de preguntas
 			{% endfor %}
 
 	</table>
+  </center>
 {% endblock %}
