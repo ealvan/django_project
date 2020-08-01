@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
@@ -47,18 +47,24 @@ def resultado(request,preguntaID):
 	return render(request,'encuestas/resultado.html',{'pregunta':pregunta})
 
 def crear_opcion(request,preguntaID):
-	try:
-		pregunta = Pregunta.objects.get(id=preguntaID)
-	except:
-		raise Http404("no existe esta pregunta")
-	if request.method == "POST":
-		try:
-			pregunta.opcion_set.create(opcion_txt=request.POST['opcion'],votos=0)
-		except:
-			raise Http404("lo sentimos no se pudo crear la bbdd")
-		return HttpResponseRedirect(reverse('encuestas:detalle', args=(pregunta.id,)))
-	else:
-		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
+    try:
+        pregunta = Pregunta.objects.get(id = preguntaID)
+    except:
+        raise Http404("no existe esta pregunta")
+
+    if request.method == "POST":
+        cadena = request.POST.get("lista");
+        lista = cadena.split(",")
+        for opcion in lista:
+            print(opcion)
+        #print(request.POST.get("lista"))
+        try:
+            pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
+        except:
+            raise Http404("lo sentimos no se pudo crear la bbdd")
+        return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
+    else:
+        return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
 
 def tablon(request):
 	
@@ -71,12 +77,12 @@ def tablon(request):
 	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
 
 def preguntaCreateView(request):
-    form = PreguntaForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form = PreguntaForm()
+        form = PreguntaForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            form = PreguntaForm()
 
-    context = {
-            'form': form
-            }
-    return render(request, 'encuestas/crearPregunta.html', context)
+        context = {
+                'form': form
+                }
+        return render(request, 'encuestas/crearPregunta.html', context)

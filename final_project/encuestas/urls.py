@@ -10,5 +10,5 @@ urlpatterns = [
 	path('<int:preguntaID>/votar/',views.votar,name = 'votar'),
 	path('<int:preguntaID>/resultado/',views.resultado,name='resultado'),
 	path('<int:preguntaID>/crear_opcion/',views.crear_opcion, name='crear_opcion'),
-    path('agregar/', views.preguntaCreateView, name = 'crear_pregunta'),
+        path('agregar/', views.preguntaCreateView, name = 'crear_pregunta'),
 ]
