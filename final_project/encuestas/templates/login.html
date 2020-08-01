@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mi login</title>
-</head>
-<body>
+{% extends 'base2.html'%}
+{% block title %}
+	Mi login
+{% endblock %}
+
+{% block body %}
 	<h1>Login</h1>
 	<form method="POST" action=".">{% csrf_token %}
 		<input type="text" name="username" placeholder="Nombre de usuario">
@@ -12,5 +12,5 @@
 	</form>
 	<span><a href="{% url 'registro' %}">Crear cuenta</a></span>
 	<p>{{mensaje}}</p>
-</body>
-</html>
+{% endblock %}
+

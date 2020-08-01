@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
@@ -76,7 +76,6 @@ def resultado(request,preguntaID):
 
 @login_required(login_url='login')
 def crear_opcion(request,preguntaID):
-
 	try:
 		pregunta = Pregunta.objects.get(id=preguntaID)
 	except:
@@ -91,6 +90,7 @@ def crear_opcion(request,preguntaID):
 	else:
 		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
 
+
 def tablon(request):
 	lista = Pregunta.objects.all()
 	if lista:
@@ -101,15 +101,14 @@ def tablon(request):
 	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
 @login_required(login_url='login')
 def preguntaCreateView(request):
-    form = PreguntaForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form = PreguntaForm()
-
-    context = {
-            'form': form
+        form = PreguntaForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            form = PreguntaForm()
+            context = {
+                    'form': form
             }
-    return render(request, 'encuestas/crearPregunta.html', context)
+            return render(request, 'encuestas/crearPregunta.html', context)
 @login_required(login_url='login')
 def borrar(request,preguntaID):
 	try:
@@ -121,3 +120,4 @@ def borrar(request,preguntaID):
 	except:
 		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
 	return render(request,'encuestas/borrar.html',{})	
+
