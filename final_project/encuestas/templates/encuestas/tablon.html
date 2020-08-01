@@ -14,6 +14,13 @@ Tablon de preguntas
 				<tr>	
 					<td>{{pregunta.pregunta_txt}}</td>
 					<td>{{pregunta.pub_fecha}}</td>
+					<td>
+						<ul>
+					{% for opcion in pregunta.opcion_set.all %}
+						<li>{{opcion}}</li>
+					{% endfor %}
+						</ul>
+					</td>
 				</tr>	
 			{% endfor %}
 

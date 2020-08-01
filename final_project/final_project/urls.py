@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('encuestas/',include('encuestas.urls')),
     path('registro/',views.registro, name='registro'),
+    path('login/',views.login, name = 'login'),
+    path('logout/',views.logoutU, name='logout'),
 ]
