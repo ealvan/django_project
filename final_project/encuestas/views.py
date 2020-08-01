@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
-from .forms import PreguntaForm
+from encuestas.forms import PreguntaForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
@@ -110,3 +110,14 @@ def preguntaCreateView(request):
             'form': form
             }
     return render(request, 'encuestas/crearPregunta.html', context)
+@login_required(login_url='login')
+def borrar(request,preguntaID):
+	try:
+		pregunta = Pregunta.objects.get(pk=preguntaID)
+	except:
+		raise Http404("lo sentimos, la pregunta no existe")
+	try:
+		pregunta.delete()
+	except:
+		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
+	return render(request,'encuestas/borrar.html',{})	
