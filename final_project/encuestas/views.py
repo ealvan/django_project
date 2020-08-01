@@ -43,7 +43,7 @@ def login(request):
 @login_required(login_url='login')
 def logoutU(request):
 	logout(request)
-	return HttpResponseRedirect(reverse('encuestas:login'))
+	return HttpResponseRedirect(reverse('login'))
 
 def detalle(request,preguntaID):
 	try:
