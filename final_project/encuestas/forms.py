@@ -20,3 +20,9 @@ class CrearUsuarioForm(UserCreationForm):
 		'password1',
 		'password2',
 		]
+		widgets = {
+			'username':forms.TextInput(attrs={'class':'special',
+											'placeholder':'ingrese su usuario'}),
+			'email':forms.EmailInput(attrs={'class':'special',
+											'placeholder':'ingrese su email'}),
+		}
