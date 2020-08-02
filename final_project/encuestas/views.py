@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.http import HttpResponse,Http404,HttpResponseRedirect, JsonResponse
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
 from encuestas.forms import PreguntaForm
@@ -7,6 +7,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
 from django.contrib.auth.decorators import login_required
+
+from django.views import View
+
+
 # Create your views here.
 
 def home(request):
@@ -128,3 +132,11 @@ def borrar(request,preguntaID):
 	except:
 		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
 	return render(request,'encuestas/borrar.html',{})
+
+class PreguntaQueryView(View):
+    def get(self, request, *args, **kwargs):
+        queryset = Pregunta.objects.all()
+        return JsonResponse(list(queryset.values()), safe = False)
+
+def tablonAjaxView(request):
+    return render(request, 'encuestas/tablonAjax.html', {})
