@@ -29,11 +29,17 @@
                         var html = '<table>\n';
                         html += '  <tr>\n';
                         html += '    <th>Preguntas</th>\n';
-                        html += '  </tr>\n';
+                        html += '    <th>Fechas</th>\n';
+			html += '    <th>Area</th>\n';
+			html += '  </tr>\n';
                         for(i in data){
                             var pregunta = data[i].pregunta_txt;
+			    var fecha = data[i].pub_fecha;
+			    var area = data[i].area;
                             html += '  <tr>\n';
                             html += '    <td>' + pregunta + '</td>\n';
+			    html += '    <td>' + fecha + '</td>\n';
+			    html += '    <td>' + area + '</td>\n';
                             html += '  </tr>\n';
                         }
                         html += '</table>\n';
