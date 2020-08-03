@@ -18,16 +18,16 @@
       var cont = document.getElementById("div1");
       cont.appendChild(parrafo);
       document.getElementById("miLista").value += document.getElementById("texto").value + ",";
-      //document.getElementById("texto").value = "";
+      document.getElementById("texto").value = "";
     }
     function borrarUltimo(){
       var cont = document.getElementById("div1");
       var hijo = cont.lastChild;
       cont.removeChild(hijo);
-    }
-    function obtenerValor(){
-      var texto = document.getElementById("texto").value;
-      return texto;
+      
+      var texto = document.getElementById("miLista").value;
+      var pos = texto.lastIndexOf(",");
+      document.getElementById("miLista").value = texto.substring(0, pos - 2);
     }
   </script>
 {% endblock %}

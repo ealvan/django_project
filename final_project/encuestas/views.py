@@ -84,7 +84,9 @@ def crear_opcion(request,preguntaID):
 
     if request.method == "POST":
         cadena = request.POST.get("lista");
+        #print(cadena)
         lista = cadena.split(",")
+        #print(lista)
         try:
             for x in range(len(lista) - 1):
                 pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
