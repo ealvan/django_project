@@ -18,6 +18,7 @@ from django.urls import path,include
 from encuestas import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.welcome, name='bienvenido'),
     path('encuestas/',include('encuestas.urls')),
     path('registro/',views.registro, name='registro'),
     path('login/',views.login, name = 'login'),
