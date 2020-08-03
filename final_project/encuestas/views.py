@@ -11,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
 	return render(request,'encuestas/home.html',{})
-
+def welcome(request):
+	return render(request,'base2.html',{})
 def registro(request):
 	if request.user.is_authenticated:
 		return HttpResponseRedirect(reverse('encuestas:home'))
