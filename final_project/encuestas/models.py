@@ -3,6 +3,7 @@ from django.utils import timezone
 # Create your models here.
 class Pregunta(models.Model):
     pregunta_txt = models.CharField(max_length=100)
+
     opciones = [('comida','Comida'),
     			('deporte','Deporte'),
     			('salud','Salud'),

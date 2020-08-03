@@ -1,0 +1,53 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+    Tablon Ajax</title>
+{% endblock %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+        <div id="demo"> 
+            <h2>Tablon de Preguntas (Ajax)</h2>
+            <button type="button" onclick="loadDoc()">Obtener tablon</button>
+        </div>
+
+        <script>
+            function loadDoc() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = JSON.parse(this.responseText);
+                        var html = '<table>\n';
+                        html += '  <tr>\n';
+                        html += '    <th>Preguntas</th>\n';
+                        html += '    <th>Fechas</th>\n';
+			html += '    <th>Area</th>\n';
+			html += '  </tr>\n';
+                        for(i in data){
+                            var pregunta = data[i].pregunta_txt;
+			    var fecha = data[i].pub_fecha;
+			    var area = data[i].area;
+                            html += '  <tr>\n';
+                            html += '    <td>' + pregunta + '</td>\n';
+			    html += '    <td>' + fecha + '</td>\n';
+			    html += '    <td>' + area + '</td>\n';
+                            html += '  </tr>\n';
+                        }
+                        html += '</table>\n';
+                        document.getElementById("demo").innerHTML = html;
+                    }
+                };
+                xhttp.open("GET", "http://127.0.0.1:8000/encuestas/query/", true);
+                xhttp.send();
+            }
+        </script>
+{% endblock %}
