@@ -1,16 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
         <head>
-                <title>
+        	 <link rel="stylesheet" href="{% static 'css/encuestas.css' %}">
+        	 <title>
+                       
                         {% block title %}
                         {% endblock %}
-                </title>
+
+             </title>
 		{% block head %}
 		{% endblock %}
         </head>
         <body>
-		<nav>
-			<ul>
+		<nav id="navegacion">
+			<ul id="button">
 				<li><a href= '{% url "encuestas:home" %}'>home</a></li>
 				<li><a href= '{% url "encuestas:tablon" %}'>Tablon de Preguntas</a></li>
 				
