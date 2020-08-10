@@ -1,0 +1,34 @@
+#button {
+ padding: 0;
+ }
+
+ #button li {
+ display: inline;
+ }
+ #button li a {
+ font-family: Arial;
+ font-size: 11px;
+ text-decoration: none;
+ float: right;
+ padding:10px;
+ background-color: #2175bc;
+ color: #fff;
+ }
+ #button li a:hover {
+ background-color: #2586d7;
+ margin-top: -2;
+ padding-bottom: 12px;]
+ }
+ 
+ h1 , h2 {
+    color: #FCA205;
+    font-family: 'Arial';
+}
+#navegacion{
+	margin:auto;
+	width:100%;
+	height: 50px;
+	border: 1px solid #2175bc ;
+	background-color: #2175bc;
+}
+
