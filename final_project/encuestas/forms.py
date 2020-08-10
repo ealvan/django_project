@@ -11,6 +11,11 @@ class PreguntaForm(forms.ModelForm):
         'pregunta_txt',
         'area',
         ]
+    widgets = {
+			'pregunta_txt':forms.TextInput(attrs={'class':'special',
+											'placeholder':'ingrese su pregunta'}),
+		}
+	
 class CrearUsuarioForm(UserCreationForm):
 	class Meta:
 		model = User
