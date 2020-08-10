@@ -1,8 +1,11 @@
 {% extends 'base.html'%}
+{% load static %}
 {% block title %}
 	Mi pregunta
 {% endblock %}
-
+{% block head%}
+   <link rel="stylesheet" type="text/css" href="{% static 'css/detalle.css' %}">
+{% endblock %}
 {% block body %}
 	<h2>Pregunta : {{pregunta.pregunta_txt}} </h2>
 	<h4>Fecha de publicacion: {{pregunta.pub_fecha}}</h4>
@@ -12,14 +15,17 @@
 	<form action="{% url 'encuestas:votar' pregunta.id %}" method="POST">{% csrf_token %}
 		{% if pregunta.opcion_set.all %}
 			{% for opcion in pregunta.opcion_set.all %}
-			<input type="radio" name="opcion" id='opcion{{forloop.counter}}' value="{{opcion.id}}">
-			<label for="opcion{{forloop.counter}}"> {{opcion.opcion_txt}}</label><br>
+			
+			<label class="container" for="opcion{{forloop.counter}}"> {{opcion.opcion_txt}}
+			<input  type="radio" name="opcion" id='opcion{{forloop.counter}}' value="{{opcion.id}}">
+			<span class="checkmark"></span>
+			</label><br>
 			{% endfor %}
-			<br><input type="submit" value="Votar">
+			<br><input  type="submit" value="Votar">
 		{%else%}
 			<p>Lo sentimos aun no existe opciones</p>
 		{% endif %}
 	</form>
-	<br><a href="{% url 'encuestas:crear_opcion' pregunta.id %}">Desea crear opciones?</a>
-	 <a href="{% url 'encuestas:borrar' pregunta.id %} ">Elimine la pregunta</a>
+	<br><a class="button3" href="{% url 'encuestas:crear_opcion' pregunta.id %}">Desea crear opciones?</a>
+	 <a class="button3" href="{% url 'encuestas:borrar' pregunta.id %} ">Elimine la pregunta</a>
 {% endblock %}
