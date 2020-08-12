@@ -21,7 +21,7 @@ Tablon de preguntas
 		
 			{% for pregunta in lista %}
 				<tr>	
-					<td>{{pregunta.pregunta_txt}}</td>
+					<td><a href="{% url 'encuestas:detalle' pregunta.id %}">{{pregunta.pregunta_txt}}</a></td>
 					<td>{{pregunta.pub_fecha}}</td>
 					<td>{{pregunta.area}}</td>
 					<td>
