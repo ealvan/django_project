@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404,HttpResponseRedirect, JsonResponse
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
@@ -81,26 +81,26 @@ def resultado(request,preguntaID):
 
 @login_required(login_url='login')
 def crear_opcion(request,preguntaID):
-    try:
-        pregunta = Pregunta.objects.get(id = preguntaID)
-    except:
-        raise Http404("no existe esta pregunta")
+	try:
+		pregunta = Pregunta.objects.get(id = preguntaID)
+	except:
+		raise Http404("no existe esta pregunta")
 
-    if request.method == "POST":
-        cadena = request.POST.get("lista");
-        #print(cadena)
-        lista = cadena.split(",")
-        #print(lista)
-        try:
-            for x in range(len(lista) - 1):
-                pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
-                #pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
-        except:
-            raise Http404("lo sentimos no se pudo crear la bbdd")
-        return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
-    else:
-        return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
-
+	if request.method == "POST":
+		cadena = request.POST.get("lista");
+		#print(cadena)
+		lista = cadena.split(",")
+		#print(lista)
+		try:
+			for x in range(len(lista) - 1):
+				pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
+				#pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
+		except:
+			raise Http404("lo sentimos no se pudo crear la bbdd")
+		return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
+	else:
+		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
+@login_required(login_url='login')
 def tablon(request):
 	lista = Pregunta.objects.all()
 	if lista:
@@ -112,15 +112,18 @@ def tablon(request):
 
 @login_required(login_url='login')
 def preguntaCreateView(request):
-        form = PreguntaForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-            form = PreguntaForm()
 
-        context = {
-                'form': form
-                }
-        return render(request, 'encuestas/crearPregunta.html', context)
+	if request.method == "POST":
+		form = PreguntaForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect("encuestas:tablon")
+	else:
+		form = PreguntaForm()
+	context = {
+	   'form': form,
+	}
+	return render(request, 'encuestas/crearPregunta.html', context)
 
 @login_required(login_url='login')
 def borrar(request,preguntaID):
@@ -135,9 +138,9 @@ def borrar(request,preguntaID):
 	return render(request,'encuestas/borrar.html',{})
 
 class PreguntaQueryView(View):
-    def get(self, request):
-        queryset = Pregunta.objects.all()
-        return JsonResponse(list(queryset.values()), safe = False)
+	def get(self, request):
+		queryset = Pregunta.objects.all()
+		return JsonResponse(list(queryset.values()), safe = False)
 
 def tablonAjaxView(request):
-    return render(request, 'encuestas/tablonAjax.html', {})
+	return render(request, 'encuestas/tablonAjax.html', {})
