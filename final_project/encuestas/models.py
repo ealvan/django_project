@@ -16,6 +16,7 @@ class Pregunta(models.Model):
     pub_fecha = models.DateTimeField('Fecha de Publicacion', default = timezone.now())
     def __str__(self):
         return f'{self.pregunta_txt}'
+    
 
 class Opcion(models.Model):
 	pregunta_txt = models.ForeignKey(Pregunta, on_delete = models.CASCADE)
