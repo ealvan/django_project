@@ -25,6 +25,11 @@
 		{% endif %}
 	</form>
 	<br><a class="button3" href="{% url 'encuestas:crear_opcion' pregunta.id %}">Desea crear opciones?</a>
+<<<<<<< HEAD
 	 <br><a class="button3" href="{% url 'encuestas:borrar' pregunta.id %} ">Elimine la pregunta</a>
 	 <br><a href="{% url 'encuestas:update' pregunta.id %}">actualizar pregunta</a>
+=======
+	 <a class="button3" href="{% url 'encuestas:borrar' pregunta.id %} ">Elimine la pregunta</a>
+	  <a class="button3" href="{% url 'encuestas:update' pregunta.id %} ">Actualizar pregunta</a>
+>>>>>>> origin/experimental
 {% endblock %}
