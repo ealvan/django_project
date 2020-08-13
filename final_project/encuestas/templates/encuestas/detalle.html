@@ -15,11 +15,9 @@
 	<form action="{% url 'encuestas:votar' pregunta.id %}" method="POST">{% csrf_token %}
 		{% if pregunta.opcion_set.all %}
 			{% for opcion in pregunta.opcion_set.all %}
-			
-			<label class="container" for="opcion{{forloop.counter}}"> {{opcion.opcion_txt}}
+			<label class="container" for="opcion{{forloop.counter}}"> {{opcion.opcion_txt}}</label>
 			<input  type="radio" name="opcion" id='opcion{{forloop.counter}}' value="{{opcion.id}}">
-			<span class="checkmark"></span>
-			</label><br>
+			<br>
 			{% endfor %}
 			<br><input  type="submit" value="Votar">
 		{%else%}
