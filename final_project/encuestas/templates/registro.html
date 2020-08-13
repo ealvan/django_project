@@ -9,9 +9,8 @@
 			<p>{{campo.label}}
 			{{campo}}</p>
 		{% endfor %}
-		<input type="submit" name="crear usuario">
+		<input type="submit" value="crear usuario">
 	</form>
-	<span><a href="{% url 'registro' %}">Crear cuenta</a></span>
-	{{form.errors}}
+	<p>{{form.errors}}</p>
 {% endblock %}
 

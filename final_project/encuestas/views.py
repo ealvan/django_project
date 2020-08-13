@@ -7,7 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
 from django.contrib.auth.decorators import login_required
-
 from django.views import View
 
 
@@ -59,7 +58,7 @@ def detalle(request,preguntaID):
 
 def votar(request,preguntaID):
 	try:
-		pregunta = Pregunta.objects.get(pk=preguntaID)
+		pregunta = Pregunta.objects.get(pk = preguntaID)
 	except:
 		raise Http404("la pregunta no existe")
 	try:
@@ -82,7 +81,7 @@ def resultado(request,preguntaID):
 @login_required(login_url='login')
 def crear_opcion(request,preguntaID):
 	try:
-		pregunta = Pregunta.objects.get(id = preguntaID)
+		pregunta = Pregunta.objects.get(pk = preguntaID)
 	except:
 		raise Http404("no existe esta pregunta")
 
@@ -90,9 +89,9 @@ def crear_opcion(request,preguntaID):
 		cadena = request.POST.get("lista");
 		#print(cadena)
 		lista = cadena.split(",")
-		#print(lista)
+		#print(lista) range
 		try:
-			for x in range(len(lista) - 1):
+			for x in range(0,len(lista) - 1):
 				pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
 				#pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
 		except:
@@ -107,8 +106,6 @@ def tablon(request):
 		return render(request,'encuestas/tablon.html',{'lista':lista,})
 	else:
 		raise Http404("lo sentimos, aun no se han publicado preguntas")
-
-	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
 
 @login_required(login_url='login')
 def preguntaCreateView(request):
@@ -133,14 +130,27 @@ def borrar(request,preguntaID):
 		raise Http404("lo sentimos, la pregunta no existe")
 	try:
 		pregunta.delete()
+		pregunta.save()
 	except:
 		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
 	return render(request,'encuestas/borrar.html',{})
 
 class PreguntaQueryView(View):
 	def get(self, request):
-		queryset = Pregunta.objects.all()
 		return JsonResponse(list(queryset.values()), safe = False)
 
+
 def tablonAjaxView(request):
+
 	return render(request, 'encuestas/tablonAjax.html', {})
+#importamos el modulo IO
+#ESCRIBIR 
+#archivo_texto = open('archivo_de_escribir_leer.txt','w')#el archivo_texto
+#el open() abre un archivo si existe y si no lo crea!!
+#open('archivo_cualquiera.txt','para_que_vas_abrir')
+#el 2do parametro es para la finalidad de abrir el archivo
+#valores posibles: 'w'(WRITE) , 'r'(READ) , 'a'(APPEND)
+#texto = '''hoy es un buen dia!! 
+#This is fine!!'''
+#archivo_texto.write(texto)
+#archivo_texto.close()
