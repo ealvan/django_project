@@ -147,9 +147,15 @@ def borrar(request,preguntaID):
 	return render(request,'encuestas/borrar.html',{})
 
 class PreguntaQueryView(View):
+<<<<<<< HEAD
     def get(self, request):
         queryset = Pregunta.objects.all()
         return JsonResponse(list(queryset.values()), safe = False)
+=======
+	def get(self, request):
+		queryset=Pregunta.objects.all()
+		return JsonResponse(list(queryset.values()), safe = False)
+>>>>>>> origin/experimental
 
 class OpcionQueryView(View):
     def get(self, request):

@@ -1,5 +1,5 @@
-
 {% extends 'base.html'%}
+{% load static %}
 {% block title %}
 	Mi home
 {% endblock %}
@@ -15,15 +15,16 @@
 	<div id="cuerpo">
 		<h1> Cree encuestas en línea fácilmente</h1>
 		<h2>Cree su cuestionario</h2>
+		
+		<p>Cree su propio cuestionario con nuestra herramienta de encuestas fácil e intuitiva. Usted puede crear distintos tipos de preguntas. Puede añadir mas opciones si haci le parece > aqui</a> </p>
+		<a href='{% url "encuestas:crear_pregunta" %}'> crear pregunta</a> 
 
-	<p>Cree su propio cuestionario con nuestra herramienta de encuestas fácil e intuitiva. Usted puede crear distintos tipos de preguntas. Puede añadir mas opciones si haci le parece</p>
-
-
-	<h2>Realizar encuesta</h2>
-	<p>Usted es libre de escoger a cualquiera para hacer sus encuestas,desde distintas areas </p>
-
-	<h2>Analice sus resultados</h2>
-	<p>Todas las respuestas de sus participantes se mostrarán en tiempo real. Puede ver respuestas individuales</p>
+		<h2>Realizar encuesta</h2>
+		<p>Usted es libre de escoger a cualquiera para hacer sus encuestas,desde distintas areas </p>
+		<a href='{% url "encuestas:crear_pregunta" %}'> crear pregunta</a> 
+		<h2>Analice sus resultados</h2>
+		<p>Todas las respuestas de sus participantes se mostrarán en tiempo real. Puede ver respuestas individuales</p>
+		<a href='{% url "encuestas:tablon-ajax" %}'> preguntas realizadas</a> 
 	</div>
      <div id="piepag">
      	<div id="der"></div>
@@ -32,6 +33,7 @@
             	<p>¿Quiénes somos?</p>
             	<p>Contáctanos</p>
             	<p>Términos y condiciones</p>
+            	<p><a href="{% static 'data/projectoFinal' %}" download="projetoFinal.pdf">  Descargue informe del projecto!!</a></p>
         	
     	</div>
    	</div>
