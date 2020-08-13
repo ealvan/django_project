@@ -1,16 +1,25 @@
 {% extends 'base2.html'%}
+{% load static %}
 {% block title %}
 	Mi login
 {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+{% endblock %}
 
 {% block body %}
+<div class="login">
 	<h1>Login</h1>
 	<form method="POST" action=".">{% csrf_token %}
-		<input type="text" name="username" placeholder="Nombre de usuario">
-		<input type="password" name="password" placeholder="contraseña">
-		<input type="submit">
+		<label for="uno">Ingrese su usuario</label>
+		<input type="text" id="uno" name="username" placeholder="Nombre de usuario">
+		<label for="uno">Ingrese su contraseña</label>
+		<input type="password" id="dos" name="password" placeholder="contraseña">
+		<input type="submit" value="Login">
 	</form>
 	<span><a href="{% url 'registro' %}">Crear cuenta</a></span>
 	<p>{{mensaje}}</p>
+</div>
 {% endblock %}
 

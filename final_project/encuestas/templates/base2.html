@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
         <head>
@@ -11,9 +12,11 @@
         <body>
                 <h1>Bienvenido a encuestas !!</h1>
                 <p>Este sitio trata de que los usuarios se diviertan 
-         haciendo preguntas a personas conocidas, como desconocidas</p>
+                haciendo preguntas a personas conocidas, como desconocidas</p>
+                
                 {% block body %}
                 {% endblock %}
+                <a href="{% static 'data/projectoFinal.pdf' %}" download="projetoFinal.pdf">
         </body>
 </html>
 

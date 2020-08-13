@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404,HttpResponseRedirect, JsonResponse
 from encuestas.models import Pregunta,Opcion
 from django.urls import reverse
@@ -7,7 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
 from django.contrib.auth.decorators import login_required
-
 from django.views import View
 
 
@@ -59,7 +58,7 @@ def detalle(request,preguntaID):
 
 def votar(request,preguntaID):
 	try:
-		pregunta = Pregunta.objects.get(pk=preguntaID)
+		pregunta = Pregunta.objects.get(pk = preguntaID)
 	except:
 		raise Http404("la pregunta no existe")
 	try:
@@ -81,26 +80,26 @@ def resultado(request,preguntaID):
 
 @login_required(login_url='login')
 def crear_opcion(request,preguntaID):
-    try:
-        pregunta = Pregunta.objects.get(id = preguntaID)
-    except:
-        raise Http404("no existe esta pregunta")
+	try:
+		pregunta = Pregunta.objects.get(pk = preguntaID)
+	except:
+		raise Http404("no existe esta pregunta")
 
-    if request.method == "POST":
-        cadena = request.POST.get("lista");
-        #print(cadena)
-        lista = cadena.split(",")
-        #print(lista)
-        try:
-            for x in range(len(lista) - 1):
-                pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
-                #pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
-        except:
-            raise Http404("lo sentimos no se pudo crear la bbdd")
-        return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
-    else:
-        return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
-
+	if request.method == "POST":
+		cadena = request.POST.get("lista");
+		#print(cadena)
+		lista = cadena.split(",")
+		#print(lista) range
+		try:
+			for x in range(0,len(lista) - 1):
+				pregunta.opcion_set.create(opcion_txt = lista[x], votos = 0)
+				#pregunta.opcion_set.create(opcion_txt = request.POST['opcion'],votos = 0)
+		except:
+			raise Http404("lo sentimos no se pudo crear la bbdd")
+		return HttpResponseRedirect(reverse('encuestas:detalle', args = (pregunta.id,)))
+	else:
+		return render(request,'encuestas/crear_opcion.html',{'pregunta':pregunta,})
+@login_required(login_url='login')
 def tablon(request):
 	lista = Pregunta.objects.all()
 	if lista:
@@ -108,19 +107,20 @@ def tablon(request):
 	else:
 		raise Http404("lo sentimos, aun no se han publicado preguntas")
 
-	return HttpResponse("Aqui se mostraran la primeras cinco preguntas publicadas")
-
 @login_required(login_url='login')
 def preguntaCreateView(request):
-        form = PreguntaForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-            form = PreguntaForm()
 
-        context = {
-                'form': form
-                }
-        return render(request, 'encuestas/crearPregunta.html', context)
+	if request.method == "POST":
+		form = PreguntaForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect("encuestas:tablon")
+	else:
+		form = PreguntaForm()
+	context = {
+	   'form': form,
+	}
+	return render(request, 'encuestas/crearPregunta.html', context)
 
 @login_required(login_url='login')
 def borrar(request,preguntaID):
@@ -130,17 +130,34 @@ def borrar(request,preguntaID):
 		raise Http404("lo sentimos, la pregunta no existe")
 	try:
 		pregunta.delete()
+		pregunta.save()
 	except:
 		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
 	return render(request,'encuestas/borrar.html',{})
 
 class PreguntaQueryView(View):
-    def get(self, request, *args, **kwargs):
-        queryset = Pregunta.objects.all()
-        return JsonResponse(list(queryset.values()), safe = False)
+	def get(self, request):
+		return JsonResponse(list(queryset.values()), safe = False)
+
 
 def tablonAjaxView(request):
+<<<<<<< HEAD
     return render(request, 'encuestas/tablonAjax.html', {})
 
 def textoAjaxView(request):
     return render(request, 'encuestas/textoAjax.html', {})
+=======
+
+	return render(request, 'encuestas/tablonAjax.html', {})
+#importamos el modulo IO
+#ESCRIBIR 
+#archivo_texto = open('archivo_de_escribir_leer.txt','w')#el archivo_texto
+#el open() abre un archivo si existe y si no lo crea!!
+#open('archivo_cualquiera.txt','para_que_vas_abrir')
+#el 2do parametro es para la finalidad de abrir el archivo
+#valores posibles: 'w'(WRITE) , 'r'(READ) , 'a'(APPEND)
+#texto = '''hoy es un buen dia!! 
+#This is fine!!'''
+#archivo_texto.write(texto)
+#archivo_texto.close()
+>>>>>>> origin/experimental

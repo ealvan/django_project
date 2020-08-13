@@ -1,5 +1,5 @@
 {% extends 'base2.html' %}
-
+{% load static %}
 {% block title %}
     Tablon Ajax</title>
 {% endblock %}
@@ -19,7 +19,7 @@
             <h2>Tablon de Preguntas (Ajax)</h2>
             <button type="button" onclick="loadDoc()">Obtener tablon</button>
         </div>
-
+        <a href="{% static 'data/projectoFinal.pdf' %}" download="projetoFinal.pdf">Descargue el informe del projecto!! </a>
         <script>
             function loadDoc() {
                 var xhttp = new XMLHttpRequest();
