@@ -137,6 +137,7 @@ def borrar(request,preguntaID):
 
 class PreguntaQueryView(View):
 	def get(self, request):
+		queryset=Pregunta.objects.all()
 		return JsonResponse(list(queryset.values()), safe = False)
 
 
