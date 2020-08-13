@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-        <head>
+        <header>
         	 <link rel="stylesheet" href="{% static 'css/encuestas.css' %}">
         	 <title>
                        
@@ -11,18 +11,22 @@
              </title>
 		{% block head %}
 		{% endblock %}
-        </head>
-        <body>
-		<nav id="navegacion">
-			<ul id="button">
-				<li><a href= '{% url "encuestas:home" %}'>home</a></li>
-				<li><a href= '{% url "encuestas:tablon" %}'>Tablon de Preguntas</a></li>
-				
-			</ul>
+        <nav id="navegacion">
+            <ul id="button">
+                <li><a href= '{% url "encuestas:home" %}'>home</a></li>
+                <li><a href= '{% url "encuestas:tablon" %}'>Tablon de Preguntas</a></li>
+                <li><a href="{% url 'logout' %}">Salir</a><li>
+            </ul>
 
-		</nav>
+        </nav>
+        </header>
+        <body>
+		
                 {% block body %}
                 {% endblock %}
+        
+           
         </body>
+
 </html>
 
