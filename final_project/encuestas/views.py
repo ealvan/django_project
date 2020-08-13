@@ -141,7 +141,6 @@ def borrar(request,preguntaID):
 		raise Http404("lo sentimos, la pregunta no existe")
 	try:
 		pregunta.delete()
-		pregunta.save()
 	except:
 		raise Http404("lo sentimos ocurrio un inesperado error,intentelo mas tarde")
 	return render(request,'encuestas/borrar.html',{})
