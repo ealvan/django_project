@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
 from django.contrib.auth.decorators import login_required
-
+from io import open
 from django.views import View
 
 
@@ -138,7 +138,24 @@ def borrar(request,preguntaID):
 
 class PreguntaQueryView(View):
 	def get(self, request):
-		queryset = Pregunta.objects.all()
+		#archivo = open("static/tablon.txt",'w')
+		#texto = "hola amigos !!"
+		#for q in Pregunta.objects.all():
+		#	texto+=q.pregunta_txt
+		#	texto+=q.pub_fecha
+		#archivo.write(texto)
 		return JsonResponse(list(queryset.values()), safe = False)
 def tablonAjaxView(request):
+
 	return render(request, 'encuestas/tablonAjax.html', {})
+#importamos el modulo IO
+#ESCRIBIR 
+#archivo_texto = open('archivo_de_escribir_leer.txt','w')#el archivo_texto
+#el open() abre un archivo si existe y si no lo crea!!
+#open('archivo_cualquiera.txt','para_que_vas_abrir')
+#el 2do parametro es para la finalidad de abrir el archivo
+#valores posibles: 'w'(WRITE) , 'r'(READ) , 'a'(APPEND)
+#texto = '''hoy es un buen dia!! 
+#This is fine!!'''
+#archivo_texto.write(texto)
+#archivo_texto.close()
