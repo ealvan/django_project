@@ -18,8 +18,6 @@ class Pregunta(models.Model):
     pub_fecha = models.DateTimeField('Fecha de Publicacion', default = timezone.now())
     def __str__(self):
         return f'{self.pregunta_txt}'
-    
-
     def get_absolute_url(self):
         return reverse('encuestas:detalle', kwargs = {'preguntaID': self.id})
 
