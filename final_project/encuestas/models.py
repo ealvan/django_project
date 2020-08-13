@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
+
 # Create your models here.
 class Pregunta(models.Model):
     pregunta_txt = models.CharField(max_length=100)
@@ -17,6 +19,9 @@ class Pregunta(models.Model):
     def __str__(self):
         return f'{self.pregunta_txt}'
     
+
+    def get_absolute_url(self):
+        return reverse('encuestas:detalle', kwargs = {'preguntaID': self.id})
 
 class Opcion(models.Model):
 	pregunta_txt = models.ForeignKey(Pregunta, on_delete = models.CASCADE)
