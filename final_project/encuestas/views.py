@@ -141,3 +141,6 @@ class PreguntaQueryView(View):
 
 def tablonAjaxView(request):
     return render(request, 'encuestas/tablonAjax.html', {})
+
+def textoAjaxView(request):
+    return render(request, 'encuestas/textoAjax.html', {})
