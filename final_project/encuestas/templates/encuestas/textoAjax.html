@@ -1,0 +1,30 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+    Tablon Ajax</title>
+{% endblock %}
+
+{% block head %}
+    <meta charset="UTF-8">
+{% endblock %}
+
+{% block body %}
+        <div id="demo">
+            <h2>Consulta (Ajax)</h2>
+            <button type="button" onclick="loadDoc()">Obtener texto</button>
+	    <br><br><a href = "http://127.0.0.1:8000/static/poema20.txt" download>Descargar txt</a>
+        </div>
+
+        <script>
+            function loadDoc() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "http://127.0.0.1:8000/static/poema20.txt", true);
+                xhttp.send();
+            }
+        </script>
+{% endblock %}

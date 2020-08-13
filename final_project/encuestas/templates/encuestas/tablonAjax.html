@@ -19,7 +19,7 @@
             <h2>Tablon de Preguntas (Ajax)</h2>
             <button type="button" onclick="loadDoc()">Obtener tablon</button>
         </div>
-        <a href="{% static 'data/projectoFinal.pdf' %}" download="projetoFinal.pdf">Descargue el informe del projecto!! </a>
+	<br><a href="{% static 'data/projectoFinal.pdf' %}" download="projetoFinal.pdf">Descargue el informe del projecto!! </a>
         <script>
             function loadDoc() {
                 var xhttp = new XMLHttpRequest();
@@ -47,6 +47,17 @@
                     }
                 };
                 xhttp.open("GET", "http://127.0.0.1:8000/encuestas/query/", true);
+                xhttp.send();
+            }
+
+	    function loadDoc2() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "http://127.0.0.1:8000/encuestas/queryOpcion/", true);
                 xhttp.send();
             }
         </script>

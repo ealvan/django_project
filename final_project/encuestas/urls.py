@@ -14,4 +14,7 @@ urlpatterns = [
         path('<int:preguntaID>/borrar/',views.borrar, name='borrar'),
         path('query/', views.PreguntaQueryView.as_view(), name = 'encuesta-query'),
         path('tablonAjax/', views.tablonAjaxView, name = 'tablon-ajax'),
+        path('textoAjax/', views.textoAjaxView, name = 'texto-ajax'),
+        path('queryOpcion/', views.OpcionQueryView.as_view(), name = 'encuesta-queryOpcion'),
+        path('<int:pk>/update/', views.PreguntaUpdateView.as_view(), name = "update"),
 ]

@@ -8,7 +8,9 @@ from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
 from django.contrib.auth.decorators import login_required
 from django.views import View
-
+from django.views.generic import (
+        UpdateView,
+        )
 
 # Create your views here.
 
@@ -55,6 +57,15 @@ def detalle(request,preguntaID):
 	except:
 		raise Http404("la pregunta no existe")
 	return render(request,'encuestas/detalle.html',{'pregunta':pregunta})
+
+class PreguntaUpdateView(UpdateView):
+    model = Pregunta
+    fields = {
+            'pregunta_txt',
+            'area',
+            'pub_fecha',
+            }
+    template_name_suffix = '_form_update'
 
 def votar(request,preguntaID):
 	try:
@@ -136,13 +147,21 @@ def borrar(request,preguntaID):
 	return render(request,'encuestas/borrar.html',{})
 
 class PreguntaQueryView(View):
-	def get(self, request):
-		queryset=Pregunta.objects.all()
-		return JsonResponse(list(queryset.values()), safe = False)
+    def get(self, request):
+        queryset = Pregunta.objects.all()
+        return JsonResponse(list(queryset.values()), safe = False)
 
+class OpcionQueryView(View):
+    def get(self, request):
+        queryset = Opcion.objects.all()
+        return JsonResponse(list(queryset.values()), safe = False)
 
 def tablonAjaxView(request):
-	return render(request, 'encuestas/tablonAjax.html', {})
+    return render(request, 'encuestas/tablonAjax.html', {})
+
+def textoAjaxView(request):
+    return render(request, 'encuestas/textoAjax.html', {})
+
 #importamos el modulo IO
 #ESCRIBIR 
 #archivo_texto = open('archivo_de_escribir_leer.txt','w')#el archivo_texto
