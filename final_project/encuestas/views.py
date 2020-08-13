@@ -142,7 +142,6 @@ class PreguntaQueryView(View):
 
 
 def tablonAjaxView(request):
-
 	return render(request, 'encuestas/tablonAjax.html', {})
 #importamos el modulo IO
 #ESCRIBIR 
