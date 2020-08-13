@@ -1,5 +1,5 @@
-
 {% extends 'base.html'%}
+{% load static %}
 {% block title %}
 	Mi home
 {% endblock %}
@@ -32,6 +32,7 @@
             	<p>¿Quiénes somos?</p>
             	<p>Contáctanos</p>
             	<p>Términos y condiciones</p>
+            	<p><a href="{% static 'data/projectoFinal' %}" download="projetoFinal.pdf">  Descargue informe del projecto!!</a></p>
         	
     	</div>
    	</div>
