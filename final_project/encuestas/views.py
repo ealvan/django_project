@@ -7,7 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login,logout,authenticate
 from encuestas.forms import CrearUsuarioForm
 from django.contrib.auth.decorators import login_required
-from io import open
 from django.views import View
 
 
@@ -138,13 +137,9 @@ def borrar(request,preguntaID):
 
 class PreguntaQueryView(View):
 	def get(self, request):
-		#archivo = open("static/tablon.txt",'w')
-		#texto = "hola amigos !!"
-		#for q in Pregunta.objects.all():
-		#	texto+=q.pregunta_txt
-		#	texto+=q.pub_fecha
-		#archivo.write(texto)
 		return JsonResponse(list(queryset.values()), safe = False)
+
+
 def tablonAjaxView(request):
 
 	return render(request, 'encuestas/tablonAjax.html', {})

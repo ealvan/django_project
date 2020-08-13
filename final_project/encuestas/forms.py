@@ -9,7 +9,7 @@ class PreguntaForm(forms.ModelForm):
     model=Pregunta 
     fields = ['pregunta_txt','area']
     widgets = {
-            'pregunta_txt':forms.TextInput(attrs={'class':'special',
+            'pregunta_txt':forms.TextInput(attrs={'class':'pregunta',
                                             'placeholder':'ingrese su pregunta'}),
         }
   def clean_pregunta_txt(self):
@@ -31,7 +31,7 @@ class CrearUsuarioForm(UserCreationForm):
         'password2',
         ]
         widgets = {
-            'username':forms.TextInput(attrs={'class':'special',
+            'username':forms.TextInput(attrs={'class':'pregunta',
                                             'placeholder':'ingrese su usuario'}),
             'email':forms.EmailInput(attrs={'class':'special',
                                             'placeholder':'ingrese su email'}),
